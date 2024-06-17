@@ -6,6 +6,8 @@ import data from "../data.json"
 console.log("=====")
 console.log(data.quizzes[0].title)
 console.log("=====")
+
+const theme = "HTML"
 ---
 
 <DefaultLayout>
@@ -14,3 +16,17 @@ console.log("=====")
         Which of these color contrast ratios defines the minimum WCAG 2.1 Level AA requirement for normal text?
     </p>
 </DefaultLayout>
+
+<script define:vars={{ data, theme }}>
+    console.log("++++")
+    console.log(theme)
+    console.log("++++")
+    console.log("++++")
+    console.log(data)
+    console.log("++++")
+    const quiz = data.quizzes.filter(q => q.title === theme)[0]
+
+    console.log("=====")
+    console.log(quiz)
+    console.log("=====")
+</script>
