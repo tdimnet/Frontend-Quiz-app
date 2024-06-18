@@ -5,6 +5,8 @@ import data from "../data.json";
 
 const theme = "HTML";
 const quiz = data.quizzes.filter((q) => q.title === theme)[0];
+
+import SubmitButton from '../components/SubmitButton.astro'
 ---
 
 <DefaultLayout>
@@ -13,6 +15,7 @@ const quiz = data.quizzes.filter((q) => q.title === theme)[0];
     Which of these color contrast ratios defines the minimum WCAG 2.1 Level AA
     requirement for normal text?
   </p>
+  
   <ul class="answers-wrapper">
     <li class="answer">A</li>
     <li class="answer">B</li>
@@ -20,11 +23,11 @@ const quiz = data.quizzes.filter((q) => q.title === theme)[0];
     <li class="answer">D</li>
   </ul>
 
-  <button class="submit-btn">Submit Answer</button>
+  <SubmitButton id="submit-btn" label="Submit Answer" />
 </DefaultLayout>
 
-<script define:vars={{ theme, quiz }}>
-  const $submitBtn = document.querySelector(".submit-btn");
+<script define:vars={{ quiz }}>
+  const $submitBtn = document.querySelector("#submit-btn");
   const $question = document.querySelector(".question");
   const questions = quiz.questions;
 
@@ -57,8 +60,6 @@ const quiz = data.quizzes.filter((q) => q.title === theme)[0];
 
     // Remove all possible answers
     $answers.forEach(($answer) => $answersWrapper.removeChild($answer));
-
-    console.log(currentQuestion);
 
     const answers = createAnswer(currentQuestion.options)
 

@@ -1,0 +1,28 @@
+---
+interface Props {
+    id: string
+    label: string
+}
+
+const { id, label } = Astro.props
+---
+
+<button id={id}>
+    {
+        label
+    }
+</button>
+
+<style>
+    button {
+        background-color: #A729F5;
+        color: white;
+        transition: .4s;
+        outline: none;
+
+        &:hover {
+            color: #A729F5;
+            background-color: white;
+        }
+    }
+</style>
