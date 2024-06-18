@@ -1,37 +1,70 @@
 ---
 import DefaultLayout from "../layouts/DefaultLayout.astro";
 
-import data from "../data.json"
+import data from "../data.json";
 
-const theme = "HTML"
-const quiz = data.quizzes.filter(q => q.title === theme)[0]
+const theme = "HTML";
+const quiz = data.quizzes.filter((q) => q.title === theme)[0];
 ---
 
 <DefaultLayout>
-    <p>Question <span class="question-number">1</span> of 10</p>
-    <p>
-        Which of these color contrast ratios defines the minimum WCAG 2.1 Level AA requirement for normal text?
-    </p>
-    <ul>
-        <li>A</li>
-        <li>B</li>
-        <li>C</li>
-        <li>D</li>
-    </ul>
+  <p>Question <span class="question-number">1</span> of 10</p>
+  <p class="question">
+    Which of these color contrast ratios defines the minimum WCAG 2.1 Level AA
+    requirement for normal text?
+  </p>
+  <ul class="answers-wrapper">
+    <li class="answer">A</li>
+    <li class="answer">B</li>
+    <li class="answer">C</li>
+    <li class="answer">D</li>
+  </ul>
 
-    <button class="submit-btn">Submit Answer</button>
+  <button class="submit-btn">Submit Answer</button>
 </DefaultLayout>
 
 <script define:vars={{ theme, quiz }}>
-    const submitBtn = document.querySelector('.submit-btn')
-    const questions = quiz.questions
+  const $submitBtn = document.querySelector(".submit-btn");
+  const $question = document.querySelector(".question");
+  const questions = quiz.questions;
 
-    submitBtn.addEventListener('click', function() {
-        const questionNumber = document.querySelector('.question-number')
-        Number(questionNumber.textContent++)
+  // Asign first question
+  $question.textContent = questions[0].question;
 
-        const currentQuestion = questions[questionNumber.textContent]
+  function createAnswer(options) {
+    let answers = [];
 
-        console.log(currentQuestion)
+    for (let i = 0; i < options.length; i++) {
+      $answer = document.createElement("li");
+      $answer.classList.add("answer");
+      $answer.textContent = options[i];
+
+      answers.push($answer)
+    }
+
+    return answers
+  }
+
+  $submitBtn.addEventListener("click", function () {
+    const questionNumber = document.querySelector(".question-number");
+    const $answersWrapper = document.querySelector(".answers-wrapper");
+    const $answers = document.querySelectorAll(".answer");
+
+    Number(questionNumber.textContent++);
+
+    const currentQuestion = questions[questionNumber.textContent];
+    $question.textContent = currentQuestion.question;
+
+    // Remove all possible answers
+    $answers.forEach(($answer) => $answersWrapper.removeChild($answer));
+
+    console.log(currentQuestion);
+
+    const answers = createAnswer(currentQuestion.options)
+
+    answers.forEach(answer => $answersWrapper.appendChild(answer))
+    $answersWrapper.addEventListener('click', function(e) {
+        console.log(e.target)
     })
+  });
 </script>
