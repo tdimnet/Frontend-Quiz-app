@@ -46,6 +46,11 @@ import Answer from "../components/Answer.astro"
   // Asign first question
   $question.textContent = questions[0].question;
 
+  $answerBtns = document.querySelectorAll('.answer-btn')
+  $answerBtns.forEach($btn => $btn.addEventListener('click', function(e) {
+    $btn.classList.add('active')
+  }))
+
   function createAnswer(options) {
     let answers = [];
 
