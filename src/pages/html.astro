@@ -7,6 +7,7 @@ const theme = "HTML";
 const quiz = data.quizzes.filter((q) => q.title === theme)[0];
 
 import SubmitButton from '../components/SubmitButton.astro'
+import Answer from "../components/Answer.astro"
 ---
 
 <DefaultLayout>
@@ -17,14 +18,25 @@ import SubmitButton from '../components/SubmitButton.astro'
   </p>
   
   <ul class="answers-wrapper">
-    <li class="answer">A</li>
-    <li class="answer">B</li>
-    <li class="answer">C</li>
-    <li class="answer">D</li>
+    <Answer number="A" content="4.5 : 1" />
+    <Answer number="B" content="3 : 1" />
+    <Answer number="C" content="2.5 : 1" />
+    <Answer number="D" content="5 : 1" />
   </ul>
 
   <SubmitButton id="submit-btn" label="Submit Answer" />
 </DefaultLayout>
+
+<style>
+  .answers-wrapper {
+    list-style-type: none;
+    padding-left: 0;
+    
+    li {
+      margin-bottom: 12px;
+    }
+  }
+</style>
 
 <script define:vars={{ quiz }}>
   const $submitBtn = document.querySelector("#submit-btn");

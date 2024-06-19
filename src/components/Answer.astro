@@ -1,0 +1,13 @@
+---
+interface Props {
+    content: string
+    number: string
+}
+
+const { content, number } = Astro.props
+---
+
+<li class="answer-btn">
+    <span class="answer-number">{number}</span>
+    <span class="answer-content">{content}</span>
+</li>
