@@ -8,6 +8,7 @@ const quiz = data.quizzes.filter((q) => q.title === theme)[0];
 
 import SubmitButton from '../components/SubmitButton.astro'
 import Answer from "../components/Answer.astro"
+import ProgressBar from "../components/ProgressBar.astro"
 ---
 
 <DefaultLayout>
@@ -16,6 +17,8 @@ import Answer from "../components/Answer.astro"
     Which of these color contrast ratios defines the minimum WCAG 2.1 Level AA
     requirement for normal text?
   </p>
+
+  <ProgressBar />
   
   <ul class="answers-wrapper">
     <Answer number="A" content="4.5 : 1" />
