@@ -11,8 +11,10 @@ import Header from "../components/Header.astro"
 		<title>Frontend Quiz App</title>
 	</head>
 	<body>
-        <Header />
-		<slot />
+		<div class="main-wrapper">
+			<Header />
+			<slot />
+		</div>
 	</body>
 </html>
 
@@ -23,5 +25,13 @@ import Header from "../components/Header.astro"
 
 	* {
 		box-sizing: border-box;
+	}
+
+	.main-wrapper {
+		@media screen and (min-width: 768px) {
+			width: 80%;
+			margin-left: auto;
+			margin-right: auto;
+		}
 	}
 </style>
