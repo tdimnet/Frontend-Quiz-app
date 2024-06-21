@@ -50,6 +50,12 @@ import ProgressBar from "../components/ProgressBar.astro"
   $question.textContent = questions[0].question;
 
   $answerBtns = document.querySelectorAll('.answer-btn')
+
+  // Adding class for testing purpose
+  $answerBtns[0].classList.add('active')
+  $answerBtns[1].classList.add('correct-answer')
+  $answerBtns[2].classList.add('wrong-answer')
+
   $answerBtns.forEach($btn => $btn.addEventListener('click', function(e) {
     $btn.classList.add('active')
   }))
