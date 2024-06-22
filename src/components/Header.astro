@@ -1,12 +1,31 @@
 ---
-import AccessibilityIcon from "./AccessibilityIcon.astro"
-import PageTitle from "./PageTitle.astro"
+import AccessibilityIcon from "./AccessibilityIcon.astro";
+import PageTitle from "./PageTitle.astro";
+import ThemeToggleSwitch from "./ThemeToggleSwitch.astro";
 ---
 
 <header>
-  <AccessibilityIcon />
+  <div class="icon-wrapper">
+    <AccessibilityIcon />
+  </div>
   <PageTitle />
-  <div class="">
-    Toggle Switch
+  <div class="toggle-switch-wrapper">
+    <ThemeToggleSwitch />
   </div>
 </header>
+
+<style>
+  header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 3rem;
+  }
+
+  .icon-wrapper {
+    margin-right: 1rem;
+  }
+
+  .toggle-switch-wrapper {
+    margin-left: auto;
+  }
+</style>
