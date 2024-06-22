@@ -41,22 +41,24 @@ import Question from "../components/Question.astro"
 
 <script define:vars={{ quiz }}>
   const $submitBtn = document.querySelector("#submit-btn");
-  const $question = document.querySelector(".question");
+  
   const questions = quiz.questions;
 
+  displayQuiz()
+
   // Asign first question
-  $question.textContent = questions[0].question;
+  // $question.textContent = questions[0].question;
 
-  $answerBtns = document.querySelectorAll('.answer-btn')
+  // $answerBtns = document.querySelectorAll('.answer-btn')
 
-  // Adding class for testing purpose
-  $answerBtns[0].classList.add('active')
-  $answerBtns[1].classList.add('correct-answer')
-  $answerBtns[2].classList.add('wrong-answer')
+  // // Adding class for testing purpose
+  // $answerBtns[0].classList.add('active')
+  // $answerBtns[1].classList.add('correct-answer')
+  // $answerBtns[2].classList.add('wrong-answer')
 
-  $answerBtns.forEach($btn => $btn.addEventListener('click', function(e) {
-    $btn.classList.add('active')
-  }))
+  // $answerBtns.forEach($btn => $btn.addEventListener('click', function(e) {
+  //   $btn.classList.add('active')
+  // }))
 
   function createAnswer(options) {
     let answers = [];
@@ -72,12 +74,11 @@ import Question from "../components/Question.astro"
     return answers
   }
 
-  $submitBtn.addEventListener("click", function () {
+  function displayQuiz() {
     const questionNumber = document.querySelector(".question-number");
+    const $question = document.querySelector(".question");
     const $answersWrapper = document.querySelector(".answers-wrapper");
     const $answers = document.querySelectorAll(".answer");
-
-    Number(questionNumber.textContent++);
 
     const currentQuestion = questions[questionNumber.textContent];
     $question.textContent = currentQuestion.question;
@@ -88,8 +89,31 @@ import Question from "../components/Question.astro"
     const answers = createAnswer(currentQuestion.options)
 
     answers.forEach(answer => $answersWrapper.appendChild(answer))
-    $answersWrapper.addEventListener('click', function(e) {
-        console.log(e.target)
-    })
+  }
+
+  $submitBtn.addEventListener("click", function () {
+
+    console.log("====")
+    console.log("====")
+    console.log("====")
+
+    // const questionNumber = document.querySelector(".question-number");
+    // const $answersWrapper = document.querySelector(".answers-wrapper");
+    // const $answers = document.querySelectorAll(".answer");
+
+    // Number(questionNumber.textContent++);
+
+    // const currentQuestion = questions[questionNumber.textContent];
+    // $question.textContent = currentQuestion.question;
+
+    // // Remove all possible answers
+    // $answers.forEach(($answer) => $answersWrapper.removeChild($answer));
+
+    // const answers = createAnswer(currentQuestion.options)
+
+    // answers.forEach(answer => $answersWrapper.appendChild(answer))
+    // $answersWrapper.addEventListener('click', function(e) {
+    //     console.log(e.target)
+    // })
   });
 </script>
