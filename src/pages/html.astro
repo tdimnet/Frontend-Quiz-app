@@ -9,15 +9,13 @@ const quiz = data.quizzes.filter((q) => q.title === theme)[0];
 import SubmitButton from '../components/SubmitButton.astro'
 import Answer from "../components/Answer.astro"
 import ProgressBar from "../components/ProgressBar.astro"
+import QuestionNumber from "../components/QuestionNumber.astro"
+import Question from "../components/Question.astro"
 ---
 
 <DefaultLayout>
-  <p>Question <span class="question-number">1</span> of 10</p>
-  <p class="question">
-    Which of these color contrast ratios defines the minimum WCAG 2.1 Level AA
-    requirement for normal text?
-  </p>
-
+  <QuestionNumber />
+  <Question />
   <ProgressBar />
   
   <ul class="answers-wrapper">
