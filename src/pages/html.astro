@@ -42,12 +42,25 @@ import Question from "../components/Question.astro"
 <script define:vars={{ quiz }}>
   const $submitBtn = document.querySelector("#submit-btn");
   const $question = document.querySelector(".question");
+  const $answerWrapper = document.querySelector('.answers-wrapper')
+  const $answerBtns = document.querySelectorAll('.answer-btn')
     
   // Asign first question
   const questions = quiz.questions;
   $question.textContent = questions[0].question;
 
-  // $answerBtns = document.querySelectorAll('.answer-btn')
+  console.log($answerBtns)
+
+  // Trying to add a new answer btn dynamically
+  const $answer = document.createElement('li')
+  $answer.classList.add('answer-btn')
+  $answer.innerHTML = `
+    <span class="answer-number">A</span>
+    <span class="answer-content">16 : 9</span>
+  `
+
+  $answerWrapper.appendChild($answer)
+
 
   // // Adding class for testing purpose
   // $answerBtns[0].classList.add('active')
