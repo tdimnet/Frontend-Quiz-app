@@ -41,6 +41,12 @@ import Question from "../components/Question.astro"
 
 <script define:vars={{ quiz }}>
   const $submitBtn = document.querySelector("#submit-btn");
+  $answerBtns = document.querySelectorAll('.answer-btn')
+
+  console.log($answerBtns)
+  const clonedAnswerBtn = $answerBtns[0].cloneNode()
+
+  console.log(clonedAnswerBtn)
   
   const questions = quiz.questions;
 
