@@ -41,19 +41,11 @@ import Question from "../components/Question.astro"
 
 <script define:vars={{ quiz }}>
   const $submitBtn = document.querySelector("#submit-btn");
-  $answerBtns = document.querySelectorAll('.answer-btn')
-
-  console.log($answerBtns)
-  const clonedAnswerBtn = $answerBtns[0].cloneNode()
-
-  console.log(clonedAnswerBtn)
-  
-  const questions = quiz.questions;
-
-  displayQuiz()
-
+  const $question = document.querySelector(".question");
+    
   // Asign first question
-  // $question.textContent = questions[0].question;
+  const questions = quiz.questions;
+  $question.textContent = questions[0].question;
 
   // $answerBtns = document.querySelectorAll('.answer-btn')
 
@@ -98,19 +90,13 @@ import Question from "../components/Question.astro"
   }
 
   $submitBtn.addEventListener("click", function () {
-
-    console.log("====")
-    console.log("====")
-    console.log("====")
-
-    // const questionNumber = document.querySelector(".question-number");
+    const questionNumber = document.querySelector(".question-number");
     // const $answersWrapper = document.querySelector(".answers-wrapper");
     // const $answers = document.querySelectorAll(".answer");
 
-    // Number(questionNumber.textContent++);
-
-    // const currentQuestion = questions[questionNumber.textContent];
-    // $question.textContent = currentQuestion.question;
+    Number(questionNumber.textContent++);
+    const currentQuestion = questions[questionNumber.textContent];
+    $question.textContent = currentQuestion.question;
 
     // // Remove all possible answers
     // $answers.forEach(($answer) => $answersWrapper.removeChild($answer));
