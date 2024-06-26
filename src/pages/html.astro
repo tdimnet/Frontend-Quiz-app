@@ -42,25 +42,10 @@ import Question from "../components/Question.astro"
 <script define:vars={{ quiz }}>
   const $submitBtn = document.querySelector("#submit-btn");
   const $question = document.querySelector(".question");
-  const $answerWrapper = document.querySelector('.answers-wrapper')
   const $answerBtns = document.querySelectorAll('.answer-btn')
-    
-  // Asign first question
-  const questions = quiz.questions;
-  $question.textContent = questions[0].question;
 
-  console.log($answerBtns)
-
-  // Trying to add a new answer btn dynamically
-  const $answer = document.createElement('li')
-  $answer.classList.add('answer-btn')
-  $answer.innerHTML = `
-    <span class="answer-number">A</span>
-    <span class="answer-content">16 : 9</span>
-  `
-
-  $answerWrapper.appendChild($answer)
-
+  let currentQuestion = 0
+  handleQuiz()
 
   // // Adding class for testing purpose
   // $answerBtns[0].classList.add('active')
@@ -71,54 +56,22 @@ import Question from "../components/Question.astro"
   //   $btn.classList.add('active')
   // }))
 
-  function createAnswer(options) {
-    let answers = [];
+  function handleQuiz() {
+    const questions = quiz.questions;
+    $question.textContent = questions[currentQuestion].question;
 
-    for (let i = 0; i < options.length; i++) {
-      $answer = document.createElement("li");
-      $answer.classList.add("answer");
-      $answer.textContent = options[i];
+    const options = questions[0].options
+    const answer = questions[0].answer
 
-      answers.push($answer)
-    }
-
-    return answers
-  }
-
-  function displayQuiz() {
-    const questionNumber = document.querySelector(".question-number");
-    const $question = document.querySelector(".question");
-    const $answersWrapper = document.querySelector(".answers-wrapper");
-    const $answers = document.querySelectorAll(".answer");
-
-    const currentQuestion = questions[questionNumber.textContent];
-    $question.textContent = currentQuestion.question;
-
-    // Remove all possible answers
-    $answers.forEach(($answer) => $answersWrapper.removeChild($answer));
-
-    const answers = createAnswer(currentQuestion.options)
-
-    answers.forEach(answer => $answersWrapper.appendChild(answer))
+    options.forEach((option, index) => {
+      $answerBtns[index].querySelector('.answer-content').textContent = option
+    })
   }
 
   $submitBtn.addEventListener("click", function () {
     const questionNumber = document.querySelector(".question-number");
-    // const $answersWrapper = document.querySelector(".answers-wrapper");
-    // const $answers = document.querySelectorAll(".answer");
-
     Number(questionNumber.textContent++);
-    const currentQuestion = questions[questionNumber.textContent];
-    $question.textContent = currentQuestion.question;
-
-    // // Remove all possible answers
-    // $answers.forEach(($answer) => $answersWrapper.removeChild($answer));
-
-    // const answers = createAnswer(currentQuestion.options)
-
-    // answers.forEach(answer => $answersWrapper.appendChild(answer))
-    // $answersWrapper.addEventListener('click', function(e) {
-    //     console.log(e.target)
-    // })
+    
+    handleQuiz()
   });
 </script>
