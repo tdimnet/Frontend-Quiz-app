@@ -51,7 +51,6 @@ import Question from "../components/Question.astro"
   // $answerBtns[1].classList.add('correct-answer')
   // $answerBtns[2].classList.add('wrong-answer')
 
-
   function onClickAnswer() {
     const $answerBtns = document.querySelectorAll('.answer-btn')
     $answerBtns.forEach($answerBtn => {
@@ -60,6 +59,22 @@ import Question from "../components/Question.astro"
         $answerBtn.classList.add('active')
       })
     })
+  }
+
+  function onCheckAnswer() {
+    const $activeAnswer = document.querySelector('.active')
+    const correctAnswer = quiz.questions[currentQuestion].answer
+
+    console.log("====")
+    console.log($activeAnswer)
+    console.log("====")
+    console.log("====")
+    console.log(correctAnswer)
+    console.log("====")
+
+    if ($activeAnswer.textContent === correctAnswer) {
+      console.log("foo")
+    }
   }
 
   function handleQuiz() {
@@ -78,7 +93,8 @@ import Question from "../components/Question.astro"
     })
   }
 
-  $submitBtn.addEventListener("click", function () {    
-    handleQuiz()
+  $submitBtn.addEventListener("click", function () {   
+    // handleQuiz()
+    onCheckAnswer()
   });
 </script>
