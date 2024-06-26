@@ -41,8 +41,10 @@ import Question from "../components/Question.astro"
 
 <script define:vars={{ quiz }}>
   const $submitBtn = document.querySelector("#submit-btn");
-  const $question = document.querySelector(".question");
-  const $answerBtns = document.querySelectorAll('.answer-btn')
+  // const $question = document.querySelector(".question");
+  // const $answerBtns = document.querySelectorAll('.answer-btn')
+
+  const questions = quiz.questions;
 
   let currentQuestion = 0
   handleQuiz()
@@ -57,21 +59,24 @@ import Question from "../components/Question.astro"
   // }))
 
   function handleQuiz() {
-    const questions = quiz.questions;
-    $question.textContent = questions[currentQuestion].question;
+    currentQuestion++
 
-    const options = questions[0].options
-    const answer = questions[0].answer
+    const questionNumber = document.querySelector('.question-number')
+    questionNumber.textContent = currentQuestion
 
-    options.forEach((option, index) => {
-      $answerBtns[index].querySelector('.answer-content').textContent = option
-    })
+    console.log("Hello quiz")
+    
+    // $question.textContent = questions[currentQuestion].question;
+
+    // const options = questions[currentQuestion].options
+    // const answer = questions[currentQuestion].answer
+
+    // options.forEach((option, index) => {
+    //   $answerBtns[index].querySelector('.answer-content').textContent = option
+    // })
   }
 
-  $submitBtn.addEventListener("click", function () {
-    const questionNumber = document.querySelector(".question-number");
-    Number(questionNumber.textContent++);
-    
+  $submitBtn.addEventListener("click", function () {    
     handleQuiz()
   });
 </script>
