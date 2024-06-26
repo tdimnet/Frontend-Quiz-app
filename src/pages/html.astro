@@ -62,18 +62,20 @@ import Question from "../components/Question.astro"
   }
 
   function onCheckAnswer() {
-    const $activeAnswer = document.querySelector('.active')
+    const choosenAnswer = document.querySelector('.active .answer-content').textContent
     const correctAnswer = quiz.questions[currentQuestion].answer
 
     console.log("====")
-    console.log($activeAnswer)
+    console.log(choosenAnswer)
     console.log("====")
     console.log("====")
     console.log(correctAnswer)
     console.log("====")
 
-    if ($activeAnswer.textContent === correctAnswer) {
+    if (choosenAnswer === correctAnswer) {
       console.log("foo")
+    } else {
+      console.log("bar")
     }
   }
 
