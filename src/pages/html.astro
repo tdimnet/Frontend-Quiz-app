@@ -41,22 +41,16 @@ import Question from "../components/Question.astro"
 
 <script define:vars={{ quiz }}>
   const $submitBtn = document.querySelector("#submit-btn");
-  // const $answerBtns = document.querySelectorAll('.answer-btn')
-
-  const questions = quiz.questions;
-
   let currentQuestion = 0
-  handleQuiz()
+
   onClickAnswer()
+  handleQuiz()
 
   // // Adding class for testing purpose
   // $answerBtns[0].classList.add('active')
   // $answerBtns[1].classList.add('correct-answer')
   // $answerBtns[2].classList.add('wrong-answer')
 
-  // $answerBtns.forEach($btn => $btn.addEventListener('click', function(e) {
-  //   $btn.classList.add('active')
-  // }))
 
   function onClickAnswer() {
     const $answerBtns = document.querySelectorAll('.answer-btn')
@@ -82,15 +76,6 @@ import Question from "../components/Question.astro"
     $answersContent.forEach(($answerContent, index) => {
       $answerContent.textContent = quiz.questions[currentQuestion].options[index]
     })
-    
-    // $question.textContent = questions[currentQuestion].question;
-
-    // const options = questions[currentQuestion].options
-    // const answer = questions[currentQuestion].answer
-
-    // options.forEach((option, index) => {
-    //   $answerBtns[index].querySelector('.answer-content').textContent = option
-    // })
   }
 
   $submitBtn.addEventListener("click", function () {    
