@@ -41,13 +41,13 @@ import Question from "../components/Question.astro"
 
 <script define:vars={{ quiz }}>
   const $submitBtn = document.querySelector("#submit-btn");
-  // const $question = document.querySelector(".question");
   // const $answerBtns = document.querySelectorAll('.answer-btn')
 
   const questions = quiz.questions;
 
   let currentQuestion = 0
   handleQuiz()
+  onClickAnswer()
 
   // // Adding class for testing purpose
   // $answerBtns[0].classList.add('active')
@@ -58,13 +58,30 @@ import Question from "../components/Question.astro"
   //   $btn.classList.add('active')
   // }))
 
+  function onClickAnswer() {
+    const $answerBtns = document.querySelectorAll('.answer-btn')
+    $answerBtns.forEach($answerBtn => {
+      $answerBtn.addEventListener('click', function() {
+        $answerBtns.forEach($answerBtn => $answerBtn.classList.remove('active'))
+        $answerBtn.classList.add('active')
+      })
+    })
+  }
+
   function handleQuiz() {
     currentQuestion++
 
     const questionNumber = document.querySelector('.question-number')
     questionNumber.textContent = currentQuestion
 
-    console.log("Hello quiz")
+    const $question = document.querySelector(".question");
+    const quizQuestion = quiz.questions[currentQuestion].question
+    $question.textContent = quizQuestion
+
+    const $answersContent = document.querySelectorAll('.answer-content')
+    $answersContent.forEach(($answerContent, index) => {
+      $answerContent.textContent = quiz.questions[currentQuestion].options[index]
+    })
     
     // $question.textContent = questions[currentQuestion].question;
 
