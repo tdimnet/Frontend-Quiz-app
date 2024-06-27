@@ -45,6 +45,7 @@ import Question from "../components/Question.astro"
   const $nextQuestionBtn = document.querySelector('#next-question-btn')
 
   let currentQuestion = 0
+  let quizScore = 0
   $nextQuestionBtn.classList.add('hidden')
 
   function onClickAnswer() {
@@ -76,6 +77,7 @@ import Question from "../components/Question.astro"
 
       if (choosenAnswer === correctAnswer) {
         $choosenAnswerBtn.classList.add('correct-answer')
+        quizScore++
       } else {
         $choosenAnswerBtn.classList.add('wrong-answer')
         $correctAnswer.classList.add('correct-answer')
@@ -85,7 +87,7 @@ import Question from "../components/Question.astro"
 
   function handleQuiz() {
     const $answerBtns = document.querySelectorAll('.answer-btn')
-    
+
     $answerBtns.forEach($answerBtn => {
       $answerBtn.classList.remove('active', 'correct-answer', 'wrong-answer')
     })
@@ -116,6 +118,12 @@ import Question from "../components/Question.astro"
     $submitBtn.classList.remove('hidden')
     $nextQuestionBtn.classList.add('hidden')
 
-    handleQuiz()
+    if (currentQuestion === (quiz.questions.length - 1)) {
+      console.log("====")
+      console.log("Le score au quiz est", quizScore)
+      console.log("====")
+    } else {
+      handleQuiz()
+    }
   })
 </script>
