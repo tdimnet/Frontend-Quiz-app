@@ -26,6 +26,7 @@ import Question from "../components/Question.astro"
   </ul>
 
   <SubmitButton id="submit-btn" label="Submit Answer" />
+  <SubmitButton id="next-question-btn" label="Next Question" />
 </DefaultLayout>
 
 <style>
@@ -41,15 +42,10 @@ import Question from "../components/Question.astro"
 
 <script define:vars={{ quiz }}>
   const $submitBtn = document.querySelector("#submit-btn");
+  const $nextQuestionBtn = document.querySelector('#next-question-btn')
+
   let currentQuestion = 0
-
-  onClickAnswer()
-  handleQuiz()
-
-  // // Adding class for testing purpose
-  // $answerBtns[0].classList.add('active')
-  // $answerBtns[1].classList.add('correct-answer')
-  // $answerBtns[2].classList.add('wrong-answer')
+  $nextQuestionBtn.classList.add('hidden')
 
   function onClickAnswer() {
     const $answerBtns = document.querySelectorAll('.answer-btn')
@@ -67,6 +63,9 @@ import Question from "../components/Question.astro"
     const $choosenAnswerBtn = document.querySelector('.active')
 
     if ($choosenAnswerBtn) {
+      $submitBtn.classList.add('hidden')
+      $nextQuestionBtn.classList.remove('hidden')
+
       const choosenAnswer = document.querySelector('.active .answer-content').textContent
       const correctAnswer = quiz.questions[currentQuestion].answer
       const $correctAnswer = $answerBtns[quiz.questions[currentQuestion].options.indexOf(correctAnswer)]
@@ -85,6 +84,12 @@ import Question from "../components/Question.astro"
   }
 
   function handleQuiz() {
+    const $answerBtns = document.querySelectorAll('.answer-btn')
+    
+    $answerBtns.forEach($answerBtn => {
+      $answerBtn.classList.remove('active', 'correct-answer', 'wrong-answer')
+    })
+
     currentQuestion++
 
     const questionNumber = document.querySelector('.question-number')
@@ -100,8 +105,17 @@ import Question from "../components/Question.astro"
     })
   }
 
+  onClickAnswer()
+  handleQuiz()
+
   $submitBtn.addEventListener("click", function () {   
-    // handleQuiz()
     onCheckAnswer()
   });
+
+  $nextQuestionBtn.addEventListener('click', function() {
+    $submitBtn.classList.remove('hidden')
+    $nextQuestionBtn.classList.add('hidden')
+
+    handleQuiz()
+  })
 </script>
