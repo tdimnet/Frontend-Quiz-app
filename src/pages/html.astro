@@ -63,28 +63,24 @@ import Question from "../components/Question.astro"
   }
 
   function onCheckAnswer() {
-    const $choosenAnswerBtn = document.querySelector('.active')
-    const choosenAnswer = document.querySelector('.active .answer-content').textContent
-    const correctAnswer = quiz.questions[currentQuestion].answer
-
     const $answerBtns = document.querySelectorAll('.answer-btn')
-    $answerBtns.forEach($answerBtn => {
-      $answerBtn.classList.remove('active', 'correct-answer', 'wrong-answer')
-    })
+    const $choosenAnswerBtn = document.querySelector('.active')
 
-    console.log("====")
-    console.log(choosenAnswer)
-    console.log("====")
-    console.log("====")
-    console.log(correctAnswer)
-    console.log("====")
+    if ($choosenAnswerBtn) {
+      const choosenAnswer = document.querySelector('.active .answer-content').textContent
+      const correctAnswer = quiz.questions[currentQuestion].answer
+      const $correctAnswer = $answerBtns[quiz.questions[currentQuestion].options.indexOf(correctAnswer)]
 
+      $answerBtns.forEach($answerBtn => {
+        $answerBtn.classList.remove('active', 'correct-answer', 'wrong-answer')
+      })
 
-
-    if (choosenAnswer === correctAnswer) {
-      $choosenAnswerBtn.classList.add('correct-answer')
-    } else {
-      $choosenAnswerBtn.classList.add('wrong-answer')
+      if (choosenAnswer === correctAnswer) {
+        $choosenAnswerBtn.classList.add('correct-answer')
+      } else {
+        $choosenAnswerBtn.classList.add('wrong-answer')
+        $correctAnswer.classList.add('correct-answer')
+      }
     }
   }
 
