@@ -1,0 +1,21 @@
+---
+import type { GetStaticPaths } from "astro";
+
+import data from "../../data.json"
+import DefaultLayout from "../../layouts/DefaultLayout.astro"
+
+export const getStaticPaths = (() => {    
+    return [
+        { params: { subject: "html" } },
+        { params: { subject: "css" } },
+        { params: { subject: "javascript" } },
+        { params: { subject: "accessibility" } }
+    ];
+}) satisfies GetStaticPaths;
+
+const { subject } = Astro.params
+---
+
+<DefaultLayout>
+    The subject is {subject}
+</DefaultLayout>
