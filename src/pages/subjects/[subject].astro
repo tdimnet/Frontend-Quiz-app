@@ -26,10 +26,15 @@ export const getStaticPaths = (() => {
 }) satisfies GetStaticPaths;
 
 const { subject } = Astro.params;
-
-console.log(Astro.props.data);
+const { data } = Astro.props
 ---
 
 <DefaultLayout>
   The subject is {subject}
 </DefaultLayout>
+
+<script define:vars={{ data }}>
+    console.log("====")
+    console.log(data)
+    console.log("====")
+</script>
