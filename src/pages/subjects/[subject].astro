@@ -1,21 +1,35 @@
 ---
 import type { GetStaticPaths } from "astro";
 
-import data from "../../data.json"
-import DefaultLayout from "../../layouts/DefaultLayout.astro"
+import data from "../../data.json";
+import DefaultLayout from "../../layouts/DefaultLayout.astro";
 
-export const getStaticPaths = (() => {    
-    return [
-        { params: { subject: "html" } },
-        { params: { subject: "css" } },
-        { params: { subject: "javascript" } },
-        { params: { subject: "accessibility" } }
-    ];
+export const getStaticPaths = (() => {
+  return [
+    {
+      params: { subject: "html" },
+      props: { data: data.quizzes.filter((quiz) => quiz.title === "HTML")[0] },
+    },
+    { 
+        params: { subject: "css" },
+        props: { data: data.quizzes.filter((quiz) => quiz.title === "CSS")[0] },
+    },
+    {
+        params: { subject: "javascript" },
+        props: { data: data.quizzes.filter((quiz) => quiz.title === "JavaScript")[0] },
+    },
+    {
+        params: { subject: "accessibility" },
+        props: { data: data.quizzes.filter((quiz) => quiz.title === "Accessibility")[0] },
+    },
+  ];
 }) satisfies GetStaticPaths;
 
-const { subject } = Astro.params
+const { subject } = Astro.params;
+
+console.log(Astro.props.data);
 ---
 
 <DefaultLayout>
-    The subject is {subject}
+  The subject is {subject}
 </DefaultLayout>
