@@ -1,4 +1,19 @@
 ---
+type Question = {
+  answer: string;
+  options: string[];
+  question: string;
+};
+
+interface Props {
+  quizData: {
+    color: string;
+    icon: string;
+    questions: Question[];
+    title: string;
+  };
+}
+
 import type { GetStaticPaths } from "astro";
 
 import data from "../../data.json";
@@ -8,33 +23,43 @@ export const getStaticPaths = (() => {
   return [
     {
       params: { subject: "html" },
-      props: { data: data.quizzes.filter((quiz) => quiz.title === "HTML")[0] },
-    },
-    { 
-        params: { subject: "css" },
-        props: { data: data.quizzes.filter((quiz) => quiz.title === "CSS")[0] },
+      props: {
+        quizData: data.quizzes.filter((quiz) => quiz.title === "HTML")[0],
+      },
     },
     {
-        params: { subject: "javascript" },
-        props: { data: data.quizzes.filter((quiz) => quiz.title === "JavaScript")[0] },
+      params: { subject: "css" },
+      props: {
+        quizData: data.quizzes.filter((quiz) => quiz.title === "CSS")[0],
+      },
     },
     {
-        params: { subject: "accessibility" },
-        props: { data: data.quizzes.filter((quiz) => quiz.title === "Accessibility")[0] },
+      params: { subject: "javascript" },
+      props: {
+        quizData: data.quizzes.filter((quiz) => quiz.title === "JavaScript")[0],
+      },
+    },
+    {
+      params: { subject: "accessibility" },
+      props: {
+        quizData: data.quizzes.filter(
+          (quiz) => quiz.title === "Accessibility"
+        )[0],
+      },
     },
   ];
 }) satisfies GetStaticPaths;
 
 const { subject } = Astro.params;
-const { data } = Astro.props
+const { quizData } = Astro.props;
 ---
 
 <DefaultLayout>
   The subject is {subject}
 </DefaultLayout>
 
-<script define:vars={{ data }}>
-    console.log("====")
-    console.log(data)
-    console.log("====")
+<script define:vars={{ quizData }}>
+  console.log("====");
+  console.log(quizData);
+  console.log("====");
 </script>
