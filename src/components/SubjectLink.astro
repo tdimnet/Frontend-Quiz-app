@@ -2,9 +2,10 @@
 interface Props {
     href: string
     content: string
+    color: string
 }
 
-const { href, content } = Astro.props
+const { href, content, color } = Astro.props
 ---
 
 <li>
@@ -14,6 +15,15 @@ const { href, content } = Astro.props
 </li>
 
 
-<style>
+<style define:vars={{ color }}>
+    li {
+        padding-top: .75rem;
+        padding-bottom: .75rem;
+        background-color: var(--color);
+    }
 
+    a {
+        color: #313E51;
+        text-decoration: none;
+    }
 </style>
