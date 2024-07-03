@@ -17,6 +17,7 @@ interface Props {
 import type { GetStaticPaths } from "astro";
 
 import data from "../../data.json";
+
 import DefaultLayout from "../../layouts/DefaultLayout.astro";
 
 export const getStaticPaths = (() => {
@@ -51,15 +52,24 @@ export const getStaticPaths = (() => {
 }) satisfies GetStaticPaths;
 
 const { subject } = Astro.params;
-const { quizData } = Astro.props;
+const { quizData: {
+  color,
+  icon,
+  title,
+  questions
+} } = Astro.props;
 ---
 
-<DefaultLayout>
+<DefaultLayout
+  color={color}
+  icon={icon}
+  title={title}
+>
   The subject is {subject}
 </DefaultLayout>
 
-<script define:vars={{ quizData }}>
+<script define:vars={{ questions }}>
   console.log("====");
-  console.log(quizData);
+  console.log(questions);
   console.log("====");
 </script>

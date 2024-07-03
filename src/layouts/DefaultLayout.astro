@@ -1,7 +1,15 @@
 ---
+interface Props {
+	color?: string
+	icon?: string
+	title?: string
+}
+
 import "@fontsource-variable/rubik"
 
 import Header from "../components/Header.astro"
+
+const { color, icon, title } = Astro.props
 ---
 
 <html lang="en">
@@ -14,7 +22,11 @@ import Header from "../components/Header.astro"
 	</head>
 	<body>
 		<div class="main-wrapper">
-			<Header />
+			<Header
+				color={color}
+				icon={icon}
+				title={title}
+			/>
 			<slot />
 		</div>
 	</body>

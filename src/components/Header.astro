@@ -1,14 +1,30 @@
 ---
+interface Props {
+  color?: string;
+  icon?: string;
+  title?: string
+}
+
 import AccessibilityIcon from "./AccessibilityIcon.astro";
 import PageTitle from "./PageTitle.astro";
 import ThemeToggleSwitch from "./ThemeToggleSwitch.astro";
+
+const { color, icon, title } = Astro.props;
 ---
 
 <header>
-  <div class="icon-wrapper">
-    <AccessibilityIcon />
-  </div>
-  <PageTitle />
+  {
+    icon && (
+      <div class="icon-wrapper">
+        <AccessibilityIcon />
+      </div>
+    )
+  }
+  {
+    title && (
+      <PageTitle content={title} />
+    )
+  }
   <div class="toggle-switch-wrapper">
     <ThemeToggleSwitch />
   </div>
