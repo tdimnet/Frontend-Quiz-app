@@ -19,6 +19,10 @@ import type { GetStaticPaths } from "astro";
 import data from "../../data.json";
 
 import DefaultLayout from "../../layouts/DefaultLayout.astro";
+import QuestionNumber from "../../components/QuestionNumber.astro";
+import Question from "../../components/Question.astro";
+import ProgressBar from "../../components/ProgressBar.astro";
+import Answer from "../../components/Answer.astro";
 
 export const getStaticPaths = (() => {
   return [
@@ -52,21 +56,34 @@ export const getStaticPaths = (() => {
 }) satisfies GetStaticPaths;
 
 const { subject } = Astro.params;
-const { quizData: {
-  color,
-  icon,
-  title,
-  questions
-} } = Astro.props;
+const {
+  quizData: { color, icon, title, questions },
+} = Astro.props;
 ---
 
-<DefaultLayout
-  color={color}
-  icon={icon}
-  title={title}
->
-  The subject is {subject}
+<DefaultLayout color={color} icon={icon} title={title}>
+  <QuestionNumber />
+  <Question />
+  <ProgressBar />
+
+  <ul class="answers-wrapper">
+    <Answer number="A" content="4.5 : 1" />
+    <Answer number="B" content="3 : 1" />
+    <Answer number="C" content="2.5 : 1" />
+    <Answer number="D" content="5 : 1" />
+  </ul>
 </DefaultLayout>
+
+<style>
+  .answers-wrapper {
+    list-style-type: none;
+    padding-left: 0;
+
+    li {
+      margin-bottom: 12px;
+    }
+  }
+</style>
 
 <script define:vars={{ questions }}>
   console.log("====");
