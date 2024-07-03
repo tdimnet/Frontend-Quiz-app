@@ -41,6 +41,9 @@ import Question from "../components/Question.astro"
 </style>
 
 <script define:vars={{ quiz }}>
+
+  console.log(quiz)
+
   const $submitBtn = document.querySelector("#submit-btn");
   const $nextQuestionBtn = document.querySelector('#next-question-btn')
 

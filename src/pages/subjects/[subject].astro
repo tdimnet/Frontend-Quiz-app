@@ -23,6 +23,7 @@ import QuestionNumber from "../../components/QuestionNumber.astro";
 import Question from "../../components/Question.astro";
 import ProgressBar from "../../components/ProgressBar.astro";
 import Answer from "../../components/Answer.astro";
+import SubmitButton from "../../components/SubmitButton.astro";
 
 export const getStaticPaths = (() => {
   return [
@@ -62,8 +63,9 @@ const {
 ---
 
 <DefaultLayout color={color} icon={icon} title={title}>
-  <QuestionNumber />
+  <QuestionNumber questionNumber="" />
   <Question />
+
   <ProgressBar />
 
   <ul class="answers-wrapper">
@@ -72,6 +74,9 @@ const {
     <Answer number="C" content="2.5 : 1" />
     <Answer number="D" content="5 : 1" />
   </ul>
+
+  <SubmitButton id="submit-btn" label="Submit Answer" />
+  <SubmitButton id="next-question-btn" label="Next Question" />
 </DefaultLayout>
 
 <style>
@@ -86,7 +91,99 @@ const {
 </style>
 
 <script define:vars={{ questions }}>
-  console.log("====");
-  console.log(questions);
-  console.log("====");
+  const $submitBtn = document.querySelector("#submit-btn");
+
+  const $nextQuestionBtn = document.querySelector("#next-question-btn");
+  $nextQuestionBtn.classList.add("hidden");
+
+  let currentQuestion = 0;
+  let quizScore = 0;
+
+  function onClickAnswer() {
+    const $answerBtns = document.querySelectorAll(".answer-btn");
+
+    $answerBtns.forEach(($answerBtn) => {
+      $answerBtn.addEventListener("click", function () {
+        $answerBtns.forEach(($answerBtn) =>
+          $answerBtn.classList.remove("active")
+        );
+        $answerBtn.classList.add("active");
+      });
+    });
+  }
+
+  function onCheckAnswer() {
+    const $answerBtns = document.querySelectorAll(".answer-btn");
+    const $choosenAnswerBtn = document.querySelector(".active");
+
+    if ($choosenAnswerBtn) {
+      $submitBtn.classList.add("hidden");
+      $nextQuestionBtn.classList.remove("hidden");
+
+      const choosenAnswer = document.querySelector(
+        ".active .answer-content"
+      ).textContent;
+      const correctAnswer = questions[currentQuestion].answer;
+      const $correctAnswer =
+        $answerBtns[questions[currentQuestion].options.indexOf(correctAnswer)];
+
+      $answerBtns.forEach(($answerBtn) => {
+        $answerBtn.classList.remove("active", "correct-answer", "wrong-answer");
+      });
+
+      if (choosenAnswer === correctAnswer) {
+        $choosenAnswerBtn.classList.add("correct-answer");
+        quizScore++;
+      } else {
+        $choosenAnswerBtn.classList.add("wrong-answer");
+        $correctAnswer.classList.add("correct-answer");
+      }
+    }
+  }
+
+  function handleQuiz() {
+    const $answerBtns = document.querySelectorAll(".answer-btn");
+
+    $answerBtns.forEach(($answerBtn) => {
+      $answerBtn.classList.remove("active", "correct-answer", "wrong-answer");
+    });
+
+    currentQuestion++;
+
+    const questionNumber = document.querySelector(".question-number");
+    questionNumber.textContent = currentQuestion;
+
+    const $question = document.querySelector(".question");
+    const quizQuestion = questions[currentQuestion].question;
+    $question.textContent = quizQuestion;
+
+    const $answersContent = document.querySelectorAll(".answer-content");
+    $answersContent.forEach(($answerContent, index) => {
+      $answerContent.textContent = questions[currentQuestion].options[index];
+    });
+  }
+
+  $submitBtn.addEventListener("click", function () {
+    onCheckAnswer();
+  });
+
+  $nextQuestionBtn.addEventListener("click", function () {
+    $submitBtn.classList.remove("hidden");
+    $nextQuestionBtn.classList.add("hidden");
+
+    if (currentQuestion === questions.length - 1) {
+      console.log("====");
+      console.log("Le score au quiz est", quizScore);
+      console.log("====");
+    } else {
+      handleQuiz();
+    }
+  });
+
+  function main() {
+    onClickAnswer();
+    handleQuiz();
+  }
+
+  main();
 </script>
