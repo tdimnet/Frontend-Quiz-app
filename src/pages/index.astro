@@ -1,27 +1,29 @@
 ---
-import DefaultLayout from "../layouts/DefaultLayout.astro"
+import DefaultLayout from "../layouts/DefaultLayout.astro";
+import SubjectLink from "../components/SubjectLink.astro";
 
-import data from "../data.json"
+import data from "../data.json";
+const subjects = data.quizzes.map((quiz) => quiz.title);
 ---
 
 <DefaultLayout>
-		<h1>Welcome to the Frontend Quiz</h1>
-		<p>Pick a subject to get started</p>
+  <h1>Welcome to the Frontend Quiz</h1>
+  <p>Pick a subject to get started</p>
 
-		<nav>
-			<ul>
-				<li>
-					<a href="/html">HTML</a>
-				</li>
-				<li>
-					<a href="/">CSS</a>
-				</li>
-				<li>
-					<a href="/">JavaScript</a>
-				</li>
-				<li>
-					<a href="/">Accessibility</a>
-				</li>
-			</ul>
-		</nav>
+  <nav>
+    <ul class="subjects">
+      {
+        subjects.map((subject) => (
+          <SubjectLink href={subject.toLocaleLowerCase()} content={subject} />
+        ))
+      }
+    </ul>
+  </nav>
 </DefaultLayout>
+
+<style>
+	.subjects {
+		list-style-type: none;
+		padding-left: 0;
+	}
+</style>
