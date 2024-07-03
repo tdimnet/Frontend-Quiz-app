@@ -56,7 +56,6 @@ export const getStaticPaths = (() => {
   ];
 }) satisfies GetStaticPaths;
 
-const { subject } = Astro.params;
 const {
   quizData: { color, icon, title, questions },
 } = Astro.props;
@@ -171,7 +170,7 @@ const {
     $submitBtn.classList.remove("hidden");
     $nextQuestionBtn.classList.add("hidden");
 
-    if (currentQuestion === questions.length - 1) {
+    if (currentQuestion === questions.length) {
       console.log("====");
       console.log("Le score au quiz est", quizScore);
       console.log("====");
