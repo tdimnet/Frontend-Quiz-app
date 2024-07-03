@@ -11,20 +11,30 @@ const { color, content, href, iconPath } = Astro.props;
 
 <li>
   <a href={href}>
-    <img src={ iconPath } alt="" />
+    <span>
+        <img src={ iconPath } alt="" />
+    </span>
     {content}
   </a>
 </li>
 
 <style define:vars={{ color }}>
-  li {
-    padding-top: 0.75rem;
-    padding-bottom: 0.75rem;
-    background-color: var(--color);
+  a {
+    align-items: center;
+    background-color: #FFF;
+    color: #313e51;
+    display: flex;
+    padding: .75rem;
+    text-decoration: none;
   }
 
-  a {
-    color: #313e51;
-    text-decoration: none;
+  span {
+    align-items: center;
+    background-color: var(--color);
+    display: flex;
+    height: 40px;
+    justify-content: center;
+    margin-right: 1rem;
+    width: 40px;
   }
 </style>
