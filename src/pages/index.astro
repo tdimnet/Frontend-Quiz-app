@@ -4,8 +4,9 @@ import SubjectLink from "../components/SubjectLink.astro";
 
 import data from "../data.json";
 const subjects = data.quizzes.map((quiz) => ({
-	title: quiz.title,
-	color: quiz.color
+  color: quiz.color,
+  icon: quiz.icon,
+  title: quiz.title,
 }));
 ---
 
@@ -17,7 +18,12 @@ const subjects = data.quizzes.map((quiz) => ({
     <ul class="subjects">
       {
         subjects.map((subject) => (
-          <SubjectLink href={subject.title.toLocaleLowerCase()} content={subject.title} color={subject.color} />
+          <SubjectLink
+            color={subject.color}
+            content={subject.title}
+            href={subject.title.toLocaleLowerCase()}
+            iconPath={subject.icon}
+          />
         ))
       }
     </ul>
@@ -25,10 +31,10 @@ const subjects = data.quizzes.map((quiz) => ({
 </DefaultLayout>
 
 <style>
-	.subjects {
-		display: grid;
-		list-style-type: none;
-		padding-left: 0;
-		gap: .75rem;
-	}
+  .subjects {
+    display: grid;
+    list-style-type: none;
+    padding-left: 0;
+    gap: 0.75rem;
+  }
 </style>
