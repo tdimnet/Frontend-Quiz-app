@@ -6,14 +6,17 @@ interface Props {
   iconPath: string;
 }
 
+import SubjectIcon from "./SubjectIcon.astro"
+
 const { color, content, href, iconPath } = Astro.props;
 ---
 
 <li>
   <a href={href}>
-    <span>
-        <img src={ iconPath } alt="" />
-    </span>
+    <SubjectIcon
+      color={color}
+      iconPath={iconPath}
+    />
     {content}
   </a>
 </li>
@@ -26,15 +29,5 @@ const { color, content, href, iconPath } = Astro.props;
     display: flex;
     padding: .75rem;
     text-decoration: none;
-  }
-
-  span {
-    align-items: center;
-    background-color: var(--color);
-    display: flex;
-    height: 40px;
-    justify-content: center;
-    margin-right: 1rem;
-    width: 40px;
   }
 </style>

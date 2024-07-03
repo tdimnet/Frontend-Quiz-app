@@ -1,0 +1,32 @@
+---
+interface Props {
+    color: string
+    iconPath: string
+}
+
+const { color, iconPath } = Astro.props
+
+console.log("====")
+---
+
+<span>
+    <img src={ iconPath } alt="">
+</span>
+
+
+<style define:vars={{ color }}>
+  span {
+    align-items: center;
+    background-color: var(--color);
+    display: flex;
+    height: 40px;
+    justify-content: center;
+    width: 40px;
+  }
+</style>
+
+
+<script>
+    console.log("++++")
+</script>
+

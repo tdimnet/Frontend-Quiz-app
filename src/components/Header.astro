@@ -5,8 +5,8 @@ interface Props {
   title?: string
 }
 
-import AccessibilityIcon from "./AccessibilityIcon.astro";
 import PageTitle from "./PageTitle.astro";
+import SubjectIcon from "./SubjectIcon.astro";
 import ThemeToggleSwitch from "./ThemeToggleSwitch.astro";
 
 const { color, icon, title } = Astro.props;
@@ -14,9 +14,12 @@ const { color, icon, title } = Astro.props;
 
 <header>
   {
-    icon && (
+    (icon && color) && (
       <div class="icon-wrapper">
-        <AccessibilityIcon />
+        <SubjectIcon
+          color={color}
+          iconPath={icon}
+        />
       </div>
     )
   }
