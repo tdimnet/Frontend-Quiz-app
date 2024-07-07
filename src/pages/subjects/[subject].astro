@@ -62,23 +62,37 @@ const {
 ---
 
 <DefaultLayout color={color} icon={icon} title={title}>
-  <QuestionNumber questionNumber="" />
-  <Question />
+  <div class="quiz-wrapper">
+    <QuestionNumber />
+    <Question />
+  
+    <ProgressBar />
+  
+    <ul class="answers-wrapper">
+      <Answer number="A" content="4.5 : 1" />
+      <Answer number="B" content="3 : 1" />
+      <Answer number="C" content="2.5 : 1" />
+      <Answer number="D" content="5 : 1" />
+    </ul>
+  
+    <SubmitButton id="submit-btn" label="Submit Answer" />
+    <SubmitButton id="next-question-btn" label="Next Question" />
+  </div>
 
-  <ProgressBar />
-
-  <ul class="answers-wrapper">
-    <Answer number="A" content="4.5 : 1" />
-    <Answer number="B" content="3 : 1" />
-    <Answer number="C" content="2.5 : 1" />
-    <Answer number="D" content="5 : 1" />
-  </ul>
-
-  <SubmitButton id="submit-btn" label="Submit Answer" />
-  <SubmitButton id="next-question-btn" label="Next Question" />
+  <div class="result-wrapper">
+    <h1>
+      Quiz completed
+      <br />
+      You scored
+    </h1>
+  </div>
 </DefaultLayout>
 
 <style>
+  .quiz-wrapper {
+    display: none;
+  }
+
   .answers-wrapper {
     list-style-type: none;
     padding-left: 0;
