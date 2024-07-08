@@ -24,6 +24,8 @@ import Question from "../../components/Question.astro";
 import ProgressBar from "../../components/ProgressBar.astro";
 import Answer from "../../components/Answer.astro";
 import SubmitButton from "../../components/SubmitButton.astro";
+import SubjectIcon from "../../components/SubjectIcon.astro"
+import PageTitle from "../../components/PageTitle.astro"
 
 export const getStaticPaths = (() => {
   return [
@@ -85,6 +87,12 @@ const {
       <br />
       You scored
     </h1>
+    <div class="score-card">
+      <div class="score-card-header">
+        <SubjectIcon color={color} iconPath={icon} />
+        <PageTitle content={title} />
+      </div>
+    </div>
     <a href="/">
       <SubmitButton id="play-again-btn" label="Play Again" />
     </a>
