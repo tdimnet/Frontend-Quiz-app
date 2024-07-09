@@ -1,0 +1,50 @@
+---
+interface Props {
+  color: string;
+  icon: string;
+  title: string;
+}
+
+const { color, icon, title } = Astro.props;
+
+import SubjectIcon from "./SubjectIcon.astro";
+import PageTitle from "./PageTitle.astro";
+---
+
+<div class="score-card">
+  <div class="score-card-header">
+    <SubjectIcon color={color} iconPath={icon} />
+    <PageTitle content={title} />
+  </div>
+  <p>
+    <span class="score-number">8</span>
+    <br />
+    Out of 10
+  </p>
+</div>
+
+<style>
+  .score-card {
+    background-color: #fff;
+    padding: 2rem;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+  }
+
+  .score-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+  }
+
+  p {
+    text-align: center;
+    font-size: 1.125rem;
+
+    .score-number {
+      font-size: 5.5rem;
+    }
+  }
+</style>

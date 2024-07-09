@@ -14,6 +14,10 @@ interface Props {
   };
 }
 
+const {
+  quizData: { color, icon, title, questions },
+} = Astro.props;
+
 import type { GetStaticPaths } from "astro";
 
 import data from "../../data.json";
@@ -24,8 +28,9 @@ import Question from "../../components/Question.astro";
 import ProgressBar from "../../components/ProgressBar.astro";
 import Answer from "../../components/Answer.astro";
 import SubmitButton from "../../components/SubmitButton.astro";
-import SubjectIcon from "../../components/SubjectIcon.astro"
-import PageTitle from "../../components/PageTitle.astro"
+import SubjectIcon from "../../components/SubjectIcon.astro";
+import PageTitle from "../../components/PageTitle.astro";
+import ScoreCard from "../../components/ScoreCard.astro";
 
 export const getStaticPaths = (() => {
   return [
@@ -57,42 +62,39 @@ export const getStaticPaths = (() => {
     },
   ];
 }) satisfies GetStaticPaths;
-
-const {
-  quizData: { color, icon, title, questions },
-} = Astro.props;
 ---
 
 <DefaultLayout color={color} icon={icon} title={title}>
   <div class="quiz-wrapper">
     <QuestionNumber />
     <Question />
-  
+
     <ProgressBar />
-  
+
     <ul class="answers-wrapper">
       <Answer number="A" content="4.5 : 1" />
       <Answer number="B" content="3 : 1" />
       <Answer number="C" content="2.5 : 1" />
       <Answer number="D" content="5 : 1" />
     </ul>
-  
+
     <SubmitButton id="submit-btn" label="Submit Answer" />
     <SubmitButton id="next-question-btn" label="Next Question" />
   </div>
 
   <div class="result-wrapper">
-    <h1>
-      Quiz completed
-      <br />
-      You scored
-    </h1>
-    <div class="score-card">
-      <div class="score-card-header">
-        <SubjectIcon color={color} iconPath={icon} />
-        <PageTitle content={title} />
-      </div>
+    <div class="heading">
+      <h1>
+        Quiz completed
+        <br />
+        <span> You scored... </span>
+      </h1>
     </div>
+
+    <div class="score-card-wrapper">
+      <ScoreCard color={color} icon={icon} title={title} />
+    </div>
+
     <a href="/">
       <SubmitButton id="play-again-btn" label="Play Again" />
     </a>
@@ -111,6 +113,25 @@ const {
     li {
       margin-bottom: 12px;
     }
+  }
+
+  .heading {
+    margin-bottom: 2.5rem;
+  }
+
+  h1 {
+    font-size: 2.5rem;
+    font-weight: 300;
+    margin-top: 0;
+    margin-bottom: 1rem;
+
+    span {
+      font-weight: 500;
+    }
+  }
+
+  .score-card-wrapper {
+    margin-bottom: 2.5rem;
   }
 </style>
 
