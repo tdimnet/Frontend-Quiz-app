@@ -72,17 +72,17 @@ export const getStaticPaths = (() => {
     <ProgressBar />
 
     <ul class="answers-wrapper">
-      <Answer number="A" content="4.5 : 1" />
-      <Answer number="B" content="3 : 1" />
-      <Answer number="C" content="2.5 : 1" />
-      <Answer number="D" content="5 : 1" />
+      <Answer number="A" content="" />
+      <Answer number="B" content="" />
+      <Answer number="C" content="" />
+      <Answer number="D" content="" />
     </ul>
 
     <SubmitButton id="submit-btn" label="Submit Answer" />
     <SubmitButton id="next-question-btn" label="Next Question" />
   </div>
 
-  <div class="result-wrapper">
+  <div class="result-wrapper hidden">
     <div class="heading">
       <h1>
         Quiz completed
@@ -102,10 +102,6 @@ export const getStaticPaths = (() => {
 </DefaultLayout>
 
 <style>
-  .quiz-wrapper {
-    display: none;
-  }
-
   .answers-wrapper {
     list-style-type: none;
     padding-left: 0;
@@ -216,10 +212,10 @@ export const getStaticPaths = (() => {
     $submitBtn.classList.remove("hidden");
     $nextQuestionBtn.classList.add("hidden");
 
-    if (currentQuestion === questions.length) {
-      console.log("====");
-      console.log("Le score au quiz est", quizScore);
-      console.log("====");
+    if (currentQuestion === questions.length - 1) {
+      document.querySelector('.quiz-wrapper').classList.add('hidden')
+      document.querySelector('.result-wrapper').classList.remove('hidden')
+      document.querySelector('.score-number').textContent = quizScore
     } else {
       handleQuiz();
     }
