@@ -36,6 +36,17 @@ const { color, icon, title } = Astro.props
 	body {
 		background-color: #F4F6FA;
 		font-family: 'Rubik Variable', sans-serif;
+		background-image: url('../../public/images/pattern-background-mobile-light.svg');
+		background-repeat: no-repeat;
+		background-size: cover;
+
+		@media screen and (min-width: 768px) {
+			background-image: url('../../public/images/pattern-background-tablet-light.svg');
+		}
+
+		@media screen and (min-width: 1024px) {
+			background-image: url('../../public/images/pattern-background-desktop-light.svg');
+		}
 	}
 
 	* {
@@ -46,6 +57,7 @@ const { color, icon, title } = Astro.props
 		width: 95%;
 		margin-left: auto;
 		margin-right: auto;
+		max-width: 1100px;
 		
 		@media screen and (min-width: 768px) {
 			width: 80%;
