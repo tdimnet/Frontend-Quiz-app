@@ -25,10 +25,17 @@ const { color, content, href, iconPath } = Astro.props;
   a {
     align-items: center;
     background-color: #FFF;
+    border-radius: 12px;
     color: #313e51;
     display: flex;
     padding: .75rem;
     text-decoration: none;
     gap: 1rem;
+    border: 1px solid #FFF;
+    transition: .4s;
+
+    &:hover {
+      border-color: #A729F5;
+    }
   }
 </style>
