@@ -2,7 +2,7 @@
     "quizzes": [
         {
             "title": "HTML",
-            "icon": "/images/icon-html.svg",
+            "icon": "https://tdimnet.github.io/Frontend-Quiz-app/images/icon-html.svg",
             "color": "#FFF1E9",
             "questions": [
                 {
@@ -109,7 +109,7 @@
         },
         {
             "title": "CSS",
-            "icon": "/images/icon-css.svg",
+            "icon": "https://tdimnet.github.io/Frontend-Quiz-app/Frontend-Quiz-app/images/icon-css.svg",
             "color": "#E0FDEF",
             "questions": [
                 {
